@@ -28,12 +28,12 @@ else:
 
 # Initialize the OpenAI clients for both partners
 aiml_client = OpenAI(
-    api_key=AIML_API_KEY,
+    api_key=AIML_API_KEY or "missing_key",
     base_url="https://api.aimlapi.com/v1"
 )
 
 featherless_client = OpenAI(
-    api_key=FEATHERLESS_API_KEY,
+    api_key=FEATHERLESS_API_KEY or "missing_key",
     base_url="https://api.featherless.ai/v1"
 )
 
@@ -227,8 +227,12 @@ async def verify_compliance_claim(
         )
 
 # Serve static files and frontend
-app.mount("/static", StaticFiles(directory="static"), name="static")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+static_dir = os.path.join(BASE_DIR, "static")
+
+if os.path.exists(static_dir):
+    app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
 @app.get("/")
 async def read_index():
-    return FileResponse("static/index.html")
+    return FileResponse(os.path.join(static_dir, "index.html"))
