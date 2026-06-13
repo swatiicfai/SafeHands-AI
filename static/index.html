@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeHands AI Compliance Orchestrator</title>
+    <meta name="description" content="Autonomous enterprise logistics claims compliance officer. Real-time driver audio transcription and multimodal cargo analysis.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="glass-bg-glow"></div>
+    <div class="glass-bg-glow secondary"></div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="brand">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="logo-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#3b82f6"/>
+                                <stop offset="1" stop-color="#10b981"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <h1>SafeHands AI</h1>
+                    <p class="brand-tagline">Compliance Orchestrator</p>
+                </div>
+            </div>
+            <div class="system-status">
+                <span class="status-dot pulse" id="status-indicator"></span>
+                <span id="status-text">SYSTEM ONLINE</span>
+            </div>
+        </header>
+
+        <!-- Main Workspace Grid -->
+        <main class="dashboard-grid">
+            <!-- Left Workspace: Input Controls -->
+            <section class="workspace-panel controls-panel">
+                <div class="panel-header">
+                    <h2>Claim Intake</h2>
+                    <p>Provide logistics metadata & imagery assets for verification</p>
+                </div>
+
+                <div class="form-container">
+                    <!-- Step 1: Voice Gateway -->
+                    <div class="step-card" id="step-1">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h3>Driver Voice Transcript</h3>
+                            <p class="step-desc">Describe cargo damage via voice or text input</p>
+                            
+                            <div class="voice-controls">
+                                <button type="button" id="record-btn" class="btn btn-secondary">
+                                    <span class="mic-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                            <line x1="12" y1="19" x2="12" y2="23"/>
+                                            <line x1="8" y1="23" x2="16" y2="23"/>
+                                        </svg>
+                                    </span>
+                                    <span id="record-btn-text">Start Speech Dictation</span>
+                                </button>
+                                
+                                <div class="audio-wave" id="audio-wave">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+
+                            <textarea id="transcript-input" placeholder="Type driver transcript here or use dictation above..." required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Cargo Imagery -->
+                    <div class="step-card" id="step-2">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h3>Cargo Imagery Asset</h3>
+                            <p class="step-desc">Upload cargo status verification photo</p>
+                            
+                            <div class="dropzone" id="drop-zone">
+                                <input type="file" id="file-input" accept="image/*" class="file-input">
+                                <div class="dropzone-prompt">
+                                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                        <polyline points="17 8 12 3 7 8"/>
+                                        <line x1="12" y1="3" x2="12" y2="15"/>
+                                    </svg>
+                                    <span class="main-text">Drag & drop cargo photo here</span>
+                                    <span class="sub-text">or <span class="browse-link">browse files</span></span>
+                                </div>
+                                <div class="preview-container" id="preview-container">
+                                    <img id="image-preview" src="" alt="Cargo Preview">
+                                    <button type="button" id="remove-img-btn" class="remove-btn">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="shortcut-actions">
+                                <button type="button" id="sample-img-btn" class="btn btn-tertiary">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                                        <polyline points="21 15 16 10 5 21"/>
+                                    </svg>
+                                    Use Sample Cargo Image (test_cargo.jpg)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Trigger -->
+                    <button type="button" id="analyze-btn" class="btn btn-primary btn-block">
+                        <span class="btn-glow"></span>
+                        <span class="btn-text" id="analyze-btn-text">Execute Compliance Verification</span>
+                        <span class="loader" id="analyze-loader"></span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Right Workspace: Agent Output/Decisions -->
+            <section class="workspace-panel results-panel">
+                <div class="panel-header">
+                    <h2>Agent Audit Report</h2>
+                    <p>AI-driven visual reasoning & automated resolution logs</p>
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="empty-state-view">
+                    <div class="empty-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                    </div>
+                    <h3>Ready for Compliance Verification</h3>
+                    <p>Populate the intake controls with transcription text and cargo evidence, then click 'Execute Compliance Verification'.</p>
+                </div>
+
+                <!-- Error Panel -->
+                <div class="error-panel" id="error-view" style="display: none;">
+                    <div class="error-header">
+                        <svg class="error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        <h4>Execution Fault Encounted</h4>
+                    </div>
+                    <p id="error-message">Error explanation goes here...</p>
+                </div>
+
+                <!-- Results Output Display -->
+                <div class="results-content" id="results-display-view" style="display: none;">
+                    <!-- Claim Verdict Card -->
+                    <div class="verdict-card" id="status-badge-card">
+                        <div class="verdict-info">
+                            <span class="sub-title">CLAIM AUDIT STATUS</span>
+                            <h2 id="result-status">APPROVED</h2>
+                        </div>
+                        <div class="verdict-icon-container">
+                            <span id="verdict-svg-icon"></span>
+                        </div>
+                    </div>
+
+                    <!-- Metrics Grid -->
+                    <div class="metrics-grid">
+                        <!-- Metric Card 1: Estimated Loss -->
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">ESTIMATED FINANCIAL LOSS</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="metric-icon">
+                                    <line x1="12" y1="1" x2="12" y2="23"/>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                </svg>
+                            </div>
+                            <div class="metric-value" id="result-loss">$0.00</div>
+                            <div class="metric-footer">Based on decay level estimation</div>
+                        </div>
+
+                        <!-- Metric Card 2: Confidence Score -->
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">CONFIDENCE SCORE</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="metric-icon">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12 6 12 12 16 14"/>
+                                </svg>
+                            </div>
+                            <div class="confidence-container">
+                                <div class="confidence-gauge">
+                                    <svg viewBox="0 0 36 36" class="circular-chart">
+                                        <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                        <path class="circle" id="confidence-circle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    </svg>
+                                    <div class="percentage" id="result-confidence">0%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Legal Rationale Card -->
+                    <div class="rationale-card">
+                        <h3>AI Agent Compliance Rationale</h3>
+                        <div class="rationale-body" id="result-rationale">
+                            No rationale available.
+                        </div>
+                    </div>
+
+                    <!-- Action Log Card -->
+                    <div class="ledger-card">
+                        <div class="ledger-header">
+                            <span class="glow-indicator"></span>
+                            <h4>Ledger Transaction Execution Log</h4>
+                        </div>
+                        <div class="ledger-body">
+                            <div class="ledger-item">
+                                <span class="label">Action Executed:</span>
+                                <span class="value code-val" id="result-action">PENDING_INTEGRATION</span>
+                            </div>
+                            <div class="ledger-item">
+                                <span class="label">Transaction Hash:</span>
+                                <span class="value code-val hash-val" id="result-tx-hash">0x7f03a6db9e4...</span>
+                            </div>
+                            <div class="ledger-item">
+                                <span class="label">Timestamp:</span>
+                                <span class="value" id="result-timestamp">--</span>
+                            </div>
+                            <div class="ledger-item">
+                                <span class="label">Block Status:</span>
+                                <span class="value badge-success">COMMITTED</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- App Script -->
+    <script src="/static/app.js"></script>
+</body>
+</html>
