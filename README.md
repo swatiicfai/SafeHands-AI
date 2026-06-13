@@ -1,7 +1,6 @@
 # 📦 SafeHands AI: Compliance Orchestrator
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://safe-hands-ai-five.vercel.app)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/swatiicfai/SafeHands-AI)
+
 
 SafeHands AI is a distributed, multi-agent AI pipeline designed to automate logistics and insurance claims. By separating cognitive tasks across specialized agents connected via the **Band** coordination layer, SafeHands AI detects insurance fraud in real-time by cross-checking driver claims against multi-modal computer vision analysis.
 
