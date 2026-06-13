@@ -52,12 +52,12 @@ graph TD
 ### Scenario 1: Fraud Detected & Claim Rejected
 The driver claimed the tomatoes were "completely destroyed" (100% loss). However, our Vision Agent detected only 30% damage. The Compliance Agent caught the lie and **REJECTED** the claim, generating a secure ledger block.
 
-*(Upload and drag-and-drop your screenshot of the REJECTED claim here)*
+![Fraud Detected - Rejected Claim](docs/rejected-claim.png)
 
 ### Scenario 2: Truthful Claim Approved
 The driver stated "tomatoes are rotten." The Vision agent confirmed the rot. Because the visual evidence perfectly matched the driver's transcript, the claim was **APPROVED**.
 
-*(Upload and drag-and-drop your screenshot of the APPROVED claim here)*
+![Truthful Claim - Approved](docs/approved-claim.png)
 
 ---
 
